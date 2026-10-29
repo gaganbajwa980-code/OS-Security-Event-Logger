@@ -27,6 +27,11 @@ show_only_suspicious = st.sidebar.checkbox(
     "Show suspicious events only",
     value=False,
 )
+severity_filter = st.sidebar.multiselect(
+    "Filter by severity",
+    options=["INFO", "WARNING", "ERROR", "HIGH"],
+    default=["INFO", "WARNING", "ERROR", "HIGH"],
+)
 
 try:
     raw_events = read_logs()
@@ -84,6 +89,12 @@ filtered = df.copy()
 
 if show_only_suspicious:
     filtered = filtered[filtered["is_suspicious"]]
+
+if severity_filter:
+    filtered = filtered[filtered["severity"].isin(severity_filter)]
+else:
+    filtered = filtered.iloc[0:0]
+
 
 if search.strip():
     filtered = filtered[
