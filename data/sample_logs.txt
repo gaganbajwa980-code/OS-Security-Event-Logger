@@ -1,0 +1,8 @@
+2026-10-29 09:00:00 INFO User session started
+2026-10-29 09:02:00 INFO Application service started
+2026-10-29 09:05:00 WARNING Failed login attempt for user admin
+2026-10-29 09:05:10 WARNING Failed login attempt for user admin
+2026-10-29 09:05:20 WARNING Failed login attempt for user admin
+2026-10-29 09:08:00 INFO User logged out
+2026-10-29 09:10:00 ERROR Unauthorized access attempt detected
+2026-10-29 09:15:00 INFO System service running normally
