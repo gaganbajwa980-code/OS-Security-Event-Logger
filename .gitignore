@@ -1,6 +1,11 @@
+
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 .env
 .streamlit/secrets.toml
+
+# Generated reports
+data/security_report.json
+data/*.csv
