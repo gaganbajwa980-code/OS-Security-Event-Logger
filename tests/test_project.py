@@ -46,5 +46,53 @@ class SecurityLoggerTests(unittest.TestCase):
         self.assertFalse(results[0]["is_suspicious"])
 
 
+    def test_unauthorized_access_is_detected(self):
+        events = [{
+            "message": "Unauthorized access attempt detected",
+            "user": "unknown",
+            "severity": "ERROR",
+        }]
+
+        results = detect_security_events(events)
+
+        self.assertTrue(results[0]["is_suspicious"])
+        self.assertIn(
+            "Unauthorized access attempt detected",
+            results[0]["alerts"],
+        )
+        self.assertEqual(results[0]["severity"], "HIGH")
+
+    def test_permission_denied_is_detected(self):
+        events = [{
+            "message": "Permission denied while opening file",
+            "user": "unknown",
+            "severity": "ERROR",
+        }]
+
+        results = detect_security_events(events)
+
+        self.assertTrue(results[0]["is_suspicious"])
+        self.assertEqual(results[0]["severity"], "HIGH")
+
+    def test_failed_logins_below_threshold_are_not_flagged(self):
+        events = [
+            {
+                "message": "Failed login attempt for user admin",
+                "user": "admin",
+                "severity": "WARNING",
+            },
+            {
+                "message": "Failed login attempt for user admin",
+                "user": "admin",
+                "severity": "WARNING",
+            },
+        ]
+
+        results = detect_security_events(events, threshold=3)
+
+        self.assertFalse(
+            any(event["is_suspicious"] for event in results)
+        )
+
 if __name__ == "__main__":
     unittest.main()
