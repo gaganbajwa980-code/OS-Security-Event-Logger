@@ -1,2 +1,5 @@
-streamlit
-pandas
+streamlit>=1.30.0
+pandas>=2.0.0
+plotly>=5.18.0
+psutil>=5.9.0
+pywin32>=306; sys_platform == 'win32'

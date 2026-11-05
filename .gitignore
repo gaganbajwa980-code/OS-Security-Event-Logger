@@ -9,3 +9,8 @@ venv/
 # Generated reports
 data/security_report.json
 data/*.csv
+
+# Checkpoints and local incident history
+data/.checkpoint.json
+data/incidents_history.json
+data/*.log
